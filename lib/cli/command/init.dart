@@ -57,8 +57,8 @@ class InitCommand extends ShowCommand {
   /// import './otherShowcase.dart' as _sc2;
   ///
   /// final showCases = [
-  ///   _sc1,
-  ///   _sc2,
+  ///   _sc1.showCase,
+  ///   _sc2.showCase,
   /// ];
   ///
   /// .....
@@ -84,7 +84,7 @@ class InitCommand extends ShowCommand {
         directives.add(
           Directive.import(
             join(pathOffset, showCases[i]),
-            as: '_sc$i',
+            as: '_sc$i.showCase',
           ),
         );
         list.add(refer('_sc$i'));
