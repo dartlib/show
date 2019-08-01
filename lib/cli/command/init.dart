@@ -11,23 +11,23 @@ import '../log.dart';
 
 /// Handles the `init` command.
 ///
-/// This creates a `src.dart` file in the project root.
+/// This creates a `showcase/showcase.dart` file in the project root.
 ///
-/// After initialization run `src update` to find all showcases
+/// After initialization run `show update` to find all showcases
 /// in your repository.
 class InitCommand extends ShowCommand {
   @override
   String get name => 'init';
 
   @override
-  String get description => 'Initialize src for your project.';
+  String get description => 'Initialize show for your project.';
 
   @override
-  String get invocation => 'Initializing src for current project ';
+  String get invocation => 'Initializing show for current project ';
 
   @override
   void run() async {
-    log.message('Initialize src');
+    log.message('Initialize show');
 
     final showCases = await _findShowCases();
 
@@ -41,7 +41,7 @@ class InitCommand extends ShowCommand {
 
     log.message('Current dir is $currentDir');
 
-    final targetPath = join(currentDir, 'src');
+    final targetPath = join(currentDir, 'showcase');
     final targetDir = Directory(targetPath);
 
     if (!targetDir.existsSync()) {
@@ -70,7 +70,7 @@ class InitCommand extends ShowCommand {
   ///
   ///
   void createImportsFile(List<String> showCases) {
-    final path = join(getCwd(), 'src/', 'src.g.dart');
+    final path = join(getCwd(), 'showcase/', 'showcase.g.dart');
     final library = buildLibrary(showCases, '../');
     final source = DartFormatter().format('${library.accept(DartEmitter())}');
 

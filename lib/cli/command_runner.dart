@@ -22,7 +22,7 @@ class ShowCaseCommandRunner extends CommandRunner {
 
   ShowCaseCommandRunner() : super('show', 'Showcase tool for your widgets.') {
     argParser
-      ..addFlag('version', negatable: false, help: 'Print src version.')
+      ..addFlag('version', negatable: false, help: 'Print show version.')
       ..addOption('verbosity', help: 'Control output verbosity.', allowed: [
         'error',
         'warning',
