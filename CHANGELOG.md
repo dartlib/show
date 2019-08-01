@@ -1,3 +1,7 @@
+## 0.0.6
+  - rename entry file to show.dart.
+  - export master detail container.
+  
 ## 0.0.5
   -  only parse files in showcase/ dir.
 
