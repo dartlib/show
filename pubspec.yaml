@@ -1,6 +1,6 @@
 name: show
 description: Showcase your flutter widgets.
-version: 0.0.2
+version: 0.0.3
 author: Rob Halff <rob.halff@gmail.com>
 homepage: https://github.com/dartlib/show
 repository: https://github.com/dartlib/show.git
@@ -19,7 +19,6 @@ dependencies:
   analyzer: '>=0.35.0 <0.38.0'
   code_builder: ^3.2.0
   dart_style: ^1.2.9
-  pubspec_parse: ^0.1.4
   flutter:
     sdk: flutter
 

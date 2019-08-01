@@ -15,7 +15,7 @@ import '../log.dart';
 ///
 /// After initialization run `src update` to find all showcases
 /// in your repository.
-class InitCommand extends PubCommand {
+class InitCommand extends ShowCommand {
   @override
   String get name => 'init';
 

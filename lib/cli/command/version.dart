@@ -1,14 +1,19 @@
+import '../../version.dart';
 import '../command.dart';
 import '../log.dart';
-import '../pubspec.dart';
 
 /// Handles the `version` command.
-class VersionCommand extends PubCommand {
+class VersionCommand extends ShowCommand {
+  @override
   String get name => 'version';
-  String get description => 'Print ${pubspec.name} version.';
-  String get invocation => '${pubspec.name} version';
+
+  @override
+  String get description => 'Print `show` version.';
+
+  @override
+  String get invocation => '`show` version';
 
   void run() {
-    log.message('Pub ${pubspec.version}');
+    log.message('Pub $version');
   }
 }

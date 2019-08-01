@@ -7,10 +7,10 @@ import 'dart:async';
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 
+import '../version.dart';
 import 'command/init.dart';
 import 'command/version.dart';
 import 'log.dart';
-import 'pubspec.dart';
 
 class ShowCaseCommandRunner extends CommandRunner {
   /// The top-level options parsed by the command runner.
@@ -51,7 +51,7 @@ class ShowCaseCommandRunner extends CommandRunner {
   @override
   Future runCommand(ArgResults topLevelResults) async {
     if (topLevelResults['version'] as bool) {
-      log.message('Showcase ${pubspec.version}');
+      log.message('Showcase $version');
       return;
     }
 
@@ -74,7 +74,7 @@ class ShowCaseCommandRunner extends CommandRunner {
         break;
     }
 
-    log.fine('Pub ${pubspec.version}');
+    log.fine('Pub $version');
 
     await super.runCommand(topLevelResults);
   }

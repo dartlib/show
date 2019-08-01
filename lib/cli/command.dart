@@ -12,7 +12,7 @@ import 'log.dart';
 /// A command may either be a "leaf" command or it may be a parent for a set
 /// of subcommands. Only leaf commands are ever actually invoked. If a command
 /// has subcommands, then one of those must always be chosen.
-abstract class PubCommand extends Command {
+abstract class ShowCommand extends Command {
   /// Override this and return `false` to disallow trailing options from being
   /// parsed after a non-option argument is parsed.
   bool get allowTrailingOptions => true;
@@ -24,6 +24,7 @@ abstract class PubCommand extends Command {
 
   ArgParser _argParser;
 
+  @override
   void printUsage() {
     log.message(usage);
   }
