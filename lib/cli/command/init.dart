@@ -28,20 +28,19 @@ class InitCommand extends ShowCommand {
   @override
   void run() async {
     log.message('Initialize show');
+    final currentDir = getCwd();
+    final targetPath = join(currentDir, 'showcase');
 
-    final showCases = await _findShowCases();
+    log.message('Current dir is $currentDir');
 
-    createShowCaseDir();
+    createShowCaseDir(targetPath);
+
+    final showCases = await _findShowCases(targetPath);
 
     createImportsFile(showCases);
   }
 
-  void createShowCaseDir() {
-    final currentDir = getCwd();
-
-    log.message('Current dir is $currentDir');
-
-    final targetPath = join(currentDir, 'showcase');
+  void createShowCaseDir(String targetPath) {
     final targetDir = Directory(targetPath);
 
     if (!targetDir.existsSync()) {
@@ -95,8 +94,8 @@ class InitCommand extends ShowCommand {
     });
   }
 
-  Future<List<String>> _findShowCases() async {
-    final dartFiles = Glob('**.dart').listSync();
+  Future<List<String>> _findShowCases(String targetPath) async {
+    final dartFiles = Glob('$targetPath/**.dart').listSync();
 
     final showCases = <String>[];
 
@@ -112,14 +111,21 @@ class InitCommand extends ShowCommand {
   }
 
   bool _isShowCase(String source) {
-    final astNode = parseCompilationUnit(source, parseFunctionBodies: false);
-
     var found = false;
-    for (var node in astNode.childEntities) {
-      if (node.runtimeType.toString() == 'FunctionDeclarationImpl') {
-        if (node.toString().contains('showCase(')) {
-          found = true;
-          break;
+
+    CompilationUnit astNode;
+
+    try {
+      astNode = parseCompilationUnit(source, parseFunctionBodies: false);
+    } catch (_) {}
+
+    if (astNode != null) {
+      for (var node in astNode.childEntities) {
+        if (node.runtimeType.toString() == 'FunctionDeclarationImpl') {
+          if (node.toString().contains('showCase(')) {
+            found = true;
+            break;
+          }
         }
       }
     }
