@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:analyzer/analyzer.dart' hide Directive;
+import 'package:analyzer/analyzer.dart' hide Directive, Block;
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:glob/glob.dart';
 import 'package:path/path.dart';
+import 'package:show/cli/templates/showcase.dart';
 
 import '../command.dart';
 import '../log.dart';
@@ -36,6 +37,8 @@ class InitCommand extends ShowCommand {
     createShowCaseDir(targetPath);
 
     final showCases = await _findShowCases(targetPath);
+
+    showCases.sort();
 
     createImportsFile(showCases);
   }
@@ -73,7 +76,26 @@ class InitCommand extends ShowCommand {
     final library = buildLibrary(showCases, '../');
     final source = DartFormatter().format('${library.accept(DartEmitter())}');
 
-    File(path).writeAsString(source);
+    final file = File(path)..writeAsString(source);
+
+    if (file.existsSync()) {
+      log.message('Updated showcase.g.dart.');
+    } else {
+      log.message('Created showcase.g.dart.');
+    }
+  }
+
+  void createShowcaseFileIfNotExists() {
+    final path = join(getCwd(), 'showcase/', 'showcase.dart');
+
+    final file = File(path);
+
+    if (file.existsSync()) {
+      log.message('showcase.dart already exists skipping.');
+    } else {
+      file.writeAsString(showCaseTemplate());
+      log.message('Created showcase.dart.');
+    }
   }
 
   Library buildLibrary(List<String> showCases, String pathOffset) {
@@ -83,14 +105,25 @@ class InitCommand extends ShowCommand {
       for (var i = 0; i < showCases.length; i++) {
         directives.add(
           Directive.import(
-            join(pathOffset, showCases[i]),
-            as: '_sc$i.showCase',
+            relative(
+              join(pathOffset, showCases[i]),
+              from: join(getCwd(), 'showcase'),
+            ),
+            as: '_sc$i',
           ),
         );
-        list.add(refer('_sc$i'));
+        list.add('_sc$i.showCase');
       }
+
+      final assignment = Block.of([
+        const Code('final showCases = ShowCase.import({'),
+        Code(list.join(', ')),
+        const Code('});'),
+      ]);
+
+      builder.directives.add(Directive.import('package:show/show.dart'));
       builder.directives.addAll(directives);
-      builder.body.add(literalList(list).assignFinal('showCases').statement);
+      builder.body.add(assignment);
     });
   }
 
