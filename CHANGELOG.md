@@ -1,3 +1,7 @@
+## 0.1.0
+  - fix not generating showcase/showcase.dart
+  - be less verbose
+
 ## 0.0.7
   - generate showcase/showcase.dart
   - improve showcase/showcase.g.dart
@@ -5,7 +9,7 @@
 ## 0.0.6
   - rename entry file to show.dart.
   - export master detail container.
-  
+
 ## 0.0.5
   -  only parse files in showcase/ dir.
 
