@@ -1,3 +1,7 @@
+## 0.0.7
+  - generate showcase/showcase.dart
+  - improve showcase/showcase.g.dart
+
 ## 0.0.6
   - rename entry file to show.dart.
   - export master detail container.
