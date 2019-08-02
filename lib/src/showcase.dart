@@ -2,6 +2,8 @@ import 'layouts/index.dart';
 import 'show.dart';
 import 'showcase_item.dart';
 
+typedef ShowCaseFunction = void Function(Show show);
+
 class ShowCase {
   Set<ShowCaseItem> items = {};
   String title;
@@ -12,5 +14,15 @@ class ShowCase {
     this.layout,
   }) {
     layout ??= Layout.gridLayout;
+  }
+
+  static Set<ShowCase> import(Iterable<ShowCaseFunction> showCases) {
+    return showCases.map<ShowCase>((showCase) {
+      final show = Show();
+
+      showCase(show);
+
+      return show.showCase;
+    }).toSet();
   }
 }
