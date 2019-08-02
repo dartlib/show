@@ -28,11 +28,8 @@ class InitCommand extends ShowCommand {
 
   @override
   void run() async {
-    log.message('Initialize show');
     final currentDir = getCwd();
     final targetPath = join(currentDir, 'showcase');
-
-    log.message('Current dir is $currentDir');
 
     createShowCaseDir(targetPath);
 
@@ -41,6 +38,8 @@ class InitCommand extends ShowCommand {
     showCases.sort();
 
     createImportsFile(showCases);
+
+    createShowcaseFileIfNotExists();
   }
 
   void createShowCaseDir(String targetPath) {
@@ -50,8 +49,6 @@ class InitCommand extends ShowCommand {
       log.message('Creating $targetDir');
 
       targetDir.createSync();
-    } else {
-      log.message('$targetDir already exists');
     }
   }
 
