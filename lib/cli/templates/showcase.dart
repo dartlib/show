@@ -9,7 +9,7 @@ void main() async {
   return runApp(
     MaterialApp(
       home: MasterDetailContainer(
-        title: Text('ShowCase'),
+        title: const Text('ShowCase'),
         items: showCases,
       ),
     ),
