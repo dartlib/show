@@ -4,7 +4,14 @@ ShowCase your flutter app.
 
 ## Getting Started
 
-'pub global activate show'
+To install show globally use:
+`pub global activate show`
+
+You will also have to add `show` to your dependencies:
+```yaml
+devDependencies:
+  show: <version>
+```
 
 ## Setup project 
 
