@@ -45,13 +45,13 @@ class _LoggerState extends State<Logger> {
                   children: <Widget>[
                     Text(
                       data.title,
-                      style: textTheme.display3,
+                      style: textTheme.body2,
                     ),
                     const SizedBox(width: 10),
                     ...data.params.map(
                       (param) => Text(
                         '$param',
-                        style: textTheme.display3,
+                        style: textTheme.body2,
                       ),
                     ),
                   ],
@@ -61,7 +61,7 @@ class _LoggerState extends State<Logger> {
                 flex: 1,
                 child: Text(
                   '(${data.signature})',
-                  style: textTheme.body2,
+                  style: textTheme.body1,
                 ),
               )
             ],

@@ -25,7 +25,7 @@ class ItemDetails extends StatelessWidget {
       return item.decorator != null ? item.decorator(factory()) : factory();
     }).toList();
 
-    final Widget content = item.layout(children);
+    final Widget content = Builder(builder: (context) => item.layout(children));
 
     if (isInTabletLayout) {
       return Column(
