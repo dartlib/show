@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:show/src/utils/uuid.dart';
 
+import '../../show.dart';
 import '../showcase.dart';
-import '../showcase_item.dart';
 import 'item_details.dart';
 import 'item_listing.dart';
 
@@ -20,7 +21,8 @@ class MasterDetailContainer extends StatefulWidget {
 class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
   static const int kTabletBreakpoint = 600;
 
-  ShowCaseItem _selectedItem;
+  int _selectedItemIndex;
+  int _selectedShowCaseIndex;
 
   Widget _buildMobileLayout() {
     return const Text('TODO');
@@ -44,7 +46,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
     */
   }
 
-  Widget _buildTabletLayout() {
+  Widget _buildTabletLayout(Set<ShowCase> items) {
     return Row(
       children: <Widget>[
         Flexible(
@@ -52,40 +54,57 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
           child: Material(
               elevation: 4.0,
               child: Column(
-                children: _buildItems(context),
+                children: _buildItems(items, context),
               )),
         ),
         Flexible(
           flex: 3,
           child: ItemDetails(
             isInTabletLayout: true,
-            item: _selectedItem,
+            item: _selectedItemIndex != null
+                ? items
+                    .elementAt(_selectedShowCaseIndex)
+                    .items
+                    .elementAt(_selectedItemIndex)
+                : null,
           ),
         ),
       ],
     );
   }
 
-  List<Widget> _buildItems(BuildContext context) {
+  List<Widget> _buildItems(Set<ShowCase> items, BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    return widget.items.map((item) {
-      return Column(children: [
-        ListTile(
-            title: Text(
-          item.title ?? 'No title',
-          style: textTheme.display2,
-        )),
-        ItemListing(
-          items: item.items,
-          itemSelectedCallback: (item) {
-            setState(() {
-              _selectedItem = item;
-            });
-          },
-          selectedItem: _selectedItem,
-        ),
-      ]);
+    var i = -1;
+    return items.map((item) {
+      final showCaseIndex = ++i;
+
+      return Column(
+        key: Key(uuid()),
+        children: [
+          ListTile(
+              title: Text(
+            item.title ?? 'No title',
+            style: textTheme.title,
+          )),
+          ItemListing(
+            items: item.items,
+            itemSelectedCallback: (int index) {
+              setState(() {
+                _selectedShowCaseIndex = showCaseIndex;
+                _selectedItemIndex = index;
+              });
+            },
+            selectedItem: _selectedItemIndex != null
+                ? items
+                    .elementAt(_selectedShowCaseIndex)
+                    .items
+                    .elementAt(_selectedItemIndex)
+                : null,
+          ),
+        ],
+      );
     }).toList();
   }
 
@@ -97,7 +116,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
     if (shortestSide < kTabletBreakpoint) {
       content = _buildMobileLayout();
     } else {
-      content = _buildTabletLayout();
+      content = Builder(builder: (_) => _buildTabletLayout(widget.items));
     }
 
     return Scaffold(

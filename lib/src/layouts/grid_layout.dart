@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:show/src/utils/uuid.dart';
 
 import 'showcase_layout.dart';
 
@@ -15,7 +16,12 @@ class GridLayout extends ShowCaseLayout {
         childAspectRatio: 3,
         padding: const EdgeInsets.all(10),
         crossAxisCount: 3,
-        children: children,
+        children: children
+            .map((widget) => Container(
+                  key: Key(uuid()),
+                  child: widget,
+                ))
+            .toList(),
       ),
     );
   }

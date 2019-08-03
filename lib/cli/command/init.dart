@@ -113,7 +113,7 @@ class InitCommand extends ShowCommand {
       }
 
       final assignment = Block.of([
-        const Code('final showCases = ShowCase.import({'),
+        const Code('final showCases = () => ShowCase.import({'),
         Code(list.join(', ')),
         const Code('});'),
       ]);
