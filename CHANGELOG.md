@@ -1,3 +1,6 @@
+## 0.2.1
+  - update readme.
+  
 ## 0.2.0
   - hot reload show cases.
   - fix font sizes.
