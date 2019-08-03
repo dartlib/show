@@ -1,3 +1,7 @@
+## 0.2.0
+  - hot reload show cases.
+  - fix font sizes.
+
 ## 0.1.0
   - fix not generating showcase/showcase.dart
   - be less verbose
