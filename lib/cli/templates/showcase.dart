@@ -6,14 +6,14 @@ import 'package:show/show.dart';
 import 'showcase.g.dart';
 
 void main() async {
-  return runApp(
-    MaterialApp(
-      home: MasterDetailContainer(
+  return runApp(MaterialApp(
+    home: Builder(
+      builder: (_) => MasterDetailContainer(
         title: const Text('ShowCase'),
-        items: showCases,
+        items: showCases(),
       ),
     ),
-  );
+  ));
 }
 ''';
 }

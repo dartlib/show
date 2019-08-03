@@ -7,7 +7,7 @@ import 'item_details.dart';
 import 'item_listing.dart';
 
 class MasterDetailContainer extends StatefulWidget {
-  final Set<ShowCaseFunction> items;
+  final Set<ShowCase> items;
   final Widget title;
   MasterDetailContainer({
     @required this.title,
@@ -113,18 +113,10 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
     Widget content;
     final shortestSide = MediaQuery.of(context).size.shortestSide;
 
-    final items = widget.items.map<ShowCase>((showCase) {
-      final show = Show();
-
-      showCase(show);
-
-      return show.showCase;
-    }).toSet();
-
     if (shortestSide < kTabletBreakpoint) {
       content = _buildMobileLayout();
     } else {
-      content = Builder(builder: (_) => _buildTabletLayout(items));
+      content = Builder(builder: (_) => _buildTabletLayout(widget.items));
     }
 
     return Scaffold(
