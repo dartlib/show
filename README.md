@@ -4,7 +4,7 @@ ShowCase your flutter app.
 
 ## Getting Started
 
-To install show globally use:
+To install `show` globally use:
 `pub global activate show`
 
 You will also have to add `show` to your dependencies:
@@ -15,7 +15,7 @@ devDependencies:
 
 ## Setup project 
 
-The setup will create a `showcase/` directory in your project root.
+The `init` command will create a `showcase/` directory in your project root.
 
 An entry `showcase/showcase.dart` will be created once.
 This file can be modified and will not be recreated as long as it exists.
@@ -28,14 +28,13 @@ show init
 
 The showcases need to be created within the newly created `showcase/` folder.
 
-Whenever you've created new files containing showcases you will need to  
-run `show init` again which will recreate `showcase/showcase.g.dart`.
-This is in order to update the files to be imported by the application.
+Whenever you've created new files containing showcases you will need to run `show init` again which will recreate `showcase/showcase.g.dart`. This is in order to update the files to be imported by the application.
 
 If you modify existing showcases they will be hot reloaded just like any other widget.
 
 
 **Example show case:**
+
 `showcase/controls.dart`
 ```dart
 import 'package:flutter/material.dart';
