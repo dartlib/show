@@ -19,6 +19,7 @@ abstract class ShowCommand extends Command {
 
   // Lazily initialize the parser because the superclass constructor requires
   // it but we want to initialize it based on [allowTrailingOptions].
+  @override
   ArgParser get argParser =>
       _argParser ??= ArgParser(allowTrailingOptions: allowTrailingOptions);
 
