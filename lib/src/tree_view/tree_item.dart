@@ -27,7 +27,8 @@ class TreeItem extends StatelessWidget {
             ? Padding(
                 padding: const EdgeInsets.only(
                   top: 6.0,
-                  left: 12.0,
+                  bottom: 6.0,
+                  left: 19.0,
                 ),
                 child: Row(
                   children: <Widget>[
@@ -43,20 +44,26 @@ class TreeItem extends StatelessWidget {
                     ),
                   ],
                 ))
-            : Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.folder_open,
-                    color: theme.primaryColor,
-                    size: 16.0,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    node.name,
-                    style: textTheme.body2,
-                  ),
-                ],
-              )
+            : Padding(
+                padding: const EdgeInsets.only(
+                  top: 6.0,
+                  bottom: 6.0,
+                  // left: 12.0,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.folder_open,
+                      color: theme.primaryColor,
+                      size: 16.0,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      node.name,
+                      style: textTheme.body2,
+                    ),
+                  ],
+                ))
       ],
     );
   }

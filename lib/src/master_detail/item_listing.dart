@@ -19,17 +19,22 @@ class ItemListing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var index = 0;
     return TreeView(
       startExpanded: true,
       onTap: itemSelectedCallback,
-      children: items.map((showCase) {
-        return TreeNode(
-          index: index++,
-          name: showCase.title,
-        )..addAll(_buildChildren(showCase.items));
-      }).toList(),
+      children: _parseShowCases(),
     );
+  }
+
+  List<TreeNode> _parseShowCases() {
+    var index = 0;
+
+    return items.map((showCase) {
+      return TreeNode(
+        index: index++,
+        name: showCase.title,
+      )..addAll(_buildChildren(showCase.items));
+    }).toList();
   }
 
   List<TreeNode> _buildChildren(Set<ShowCaseItem> items) {
