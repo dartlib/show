@@ -2,7 +2,7 @@
 
 ShowCase your flutter app.
 
-![Screenshot](/assets/screenshot.png?raw=true)
+![Screenshot](https://raw.githubusercontent.com/dartlib/show/develop/assets/screenshot.png)
 
 ## Getting Started
 
