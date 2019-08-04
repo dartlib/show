@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:show/src/utils/uuid.dart';
+import 'package:show/src/tree_view/tree_node.dart';
 
 import '../../show.dart';
 import '../showcase.dart';
@@ -24,88 +24,49 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
   int _selectedItemIndex;
   int _selectedShowCaseIndex;
 
-  Widget _buildMobileLayout() {
-    return const Text('TODO');
-    /*
-    return ItemListing(
-      items: widget.items,
-      itemSelectedCallback: (item) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) {
-              return ItemDetails(
-                isInTabletLayout: false,
-                item: item,
-              );
-            },
-          ),
-        );
-      },
-    );
-    */
-  }
-
-  Widget _buildTabletLayout(Set<ShowCase> items) {
+  Widget _buildTabletLayout() {
     return Row(
       children: <Widget>[
         Flexible(
           flex: 1,
           child: Material(
-              elevation: 4.0,
-              child: Column(
-                children: _buildItems(items, context),
-              )),
+            elevation: 2.0,
+            child: _buildItems(context),
+          ),
         ),
         Flexible(
           flex: 3,
           child: ItemDetails(
             isInTabletLayout: true,
-            item: _selectedItemIndex != null
-                ? items
-                    .elementAt(_selectedShowCaseIndex)
-                    .items
-                    .elementAt(_selectedItemIndex)
-                : null,
+            item: _selectedItem,
           ),
         ),
       ],
     );
   }
 
-  List<Widget> _buildItems(Set<ShowCase> items, BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+  ShowCaseItem get _selectedItem {
+    if (_selectedItemIndex != null && _selectedShowCaseIndex != null) {
+      return widget.items
+          .elementAt(_selectedShowCaseIndex)
+          .items
+          .elementAt(_selectedItemIndex);
+    }
 
-    var i = -1;
-    return items.map((item) {
-      final showCaseIndex = ++i;
+    return null;
+  }
 
-      return Column(
-        key: Key(uuid()),
-        children: [
-          ListTile(
-              title: Text(
-            item.title ?? 'No title',
-            style: textTheme.title,
-          )),
-          ItemListing(
-            items: item.items,
-            itemSelectedCallback: (int index) {
-              setState(() {
-                _selectedShowCaseIndex = showCaseIndex;
-                _selectedItemIndex = index;
-              });
-            },
-            selectedItem: _selectedItemIndex != null
-                ? items
-                    .elementAt(_selectedShowCaseIndex)
-                    .items
-                    .elementAt(_selectedItemIndex)
-                : null,
-          ),
-        ],
-      );
-    }).toList();
+  Widget _buildItems(BuildContext context) {
+    return ItemListing(
+      items: widget.items,
+      itemSelectedCallback: (TreeNode node) {
+        setState(() {
+          _selectedItemIndex = node.index;
+          _selectedShowCaseIndex = node.parent.index;
+        });
+      },
+      selectedItem: _selectedItem,
+    );
   }
 
   @override
@@ -114,9 +75,9 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
     final shortestSide = MediaQuery.of(context).size.shortestSide;
 
     if (shortestSide < kTabletBreakpoint) {
-      content = _buildMobileLayout();
+      content = const Text('Mobile not supported');
     } else {
-      content = Builder(builder: (_) => _buildTabletLayout(widget.items));
+      content = Builder(builder: (_) => _buildTabletLayout());
     }
 
     return Scaffold(

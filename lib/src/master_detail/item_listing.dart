@@ -1,40 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:show/src/utils/uuid.dart';
+import 'package:show/show.dart';
+import 'package:show/src/tree_view/tree_item.dart';
+import 'package:show/src/tree_view/tree_node.dart';
+import 'package:show/src/tree_view/tree_view.dart';
 
 import '../showcase_item.dart';
 
 class ItemListing extends StatelessWidget {
-  final Set<ShowCaseItem> items;
+  final Set<ShowCase> items;
   ItemListing({
     @required this.itemSelectedCallback,
     @required this.items,
     this.selectedItem,
   });
 
-  final ValueChanged<int> itemSelectedCallback;
+  final TreeItemCallback itemSelectedCallback;
   final ShowCaseItem selectedItem;
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    var index = 0;
+    return TreeView(
+      startExpanded: true,
+      children: _getChildList(
+        items.map((showCase) {
+          return TreeNode(
+            index: index++,
+            name: showCase.title,
+          )..addAll(showCase.items);
+        }).toList(),
+      ),
+    );
+  }
 
-    var i = -1;
-    return Column(
-        children: items.map(
-      (showCase) {
-        final index = ++i;
-
-        return ListTile(
-          key: Key(uuid()),
-          onTap: () => itemSelectedCallback(index),
-          selected: selectedItem == showCase,
-          title: Text(
-            showCase.title ?? 'No Title',
-            style: textTheme.subtitle,
+  List<Widget> _getChildList(List<TreeNode> childTreeNodes) {
+    return childTreeNodes.map((node) {
+      if (node.isLeafNode) {
+        return Container(
+          margin: const EdgeInsets.only(left: 8),
+          child: TreeViewChild(
+            parent: TreeItem(node: node),
+            onTap: itemSelectedCallback,
+            children: _getChildList(node.children),
           ),
         );
-      },
-    ).toList());
+      }
+      return Container(
+        margin: const EdgeInsets.only(left: 4),
+        child: TreeViewChild(
+          parent: TreeItem(node: node),
+          children: _getChildList(node.children),
+        ),
+      );
+    }).toList();
   }
 }
