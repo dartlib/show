@@ -1,1 +1,1 @@
-final version = '0.2.1';
+final version = '0.3.0';
