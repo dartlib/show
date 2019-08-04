@@ -2,6 +2,8 @@
 
 ShowCase your flutter app.
 
+![Screenshot](/assets/screenshot.png?raw=true)
+
 ## Getting Started
 
 To install `show` globally use:
