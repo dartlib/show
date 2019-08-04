@@ -9,7 +9,6 @@ void main() async {
   return runApp(MaterialApp(
     home: Builder(
       builder: (_) => MasterDetailContainer(
-        title: const Text('ShowCase'),
         items: showCases(),
       ),
     ),

@@ -25,6 +25,7 @@ class TreeView extends StatefulWidget {
 
 class _TreeViewState extends State<TreeView> {
   int activeNodeIndex;
+  int activeLeafIndex;
 
   @override
   @override
@@ -39,20 +40,19 @@ class _TreeViewState extends State<TreeView> {
     return childTreeNodes.map((node) {
       if (node.isLeafNode) {
         return Container(
-          margin: const EdgeInsets.only(left: 8),
+          // margin: const EdgeInsets.only(left: 8),
           child: TreeViewChild(
             parent: TreeItem(
               node: node,
-              expanded: activeNodeIndex == node.index,
+              expanded: activeLeafIndex == node.index,
             ),
-            active: activeNodeIndex == node.index,
+            active: activeLeafIndex == node.index,
             onTap: _onTap,
-            children: _getChildList(node.children, onTap),
           ),
         );
       }
       return Container(
-        margin: const EdgeInsets.only(left: 4),
+        // margin: const EdgeInsets.only(left: 4),
         child: TreeViewChild(
           onTap: _onTap,
           parent: TreeItem(
@@ -69,6 +69,7 @@ class _TreeViewState extends State<TreeView> {
   void _onTap(TreeNode node) {
     if (node.isLeafNode) {
       widget.onTap(node);
+      activeLeafIndex = node.index;
     } else {
       setState(() {
         if (activeNodeIndex == node.index) {
@@ -76,6 +77,7 @@ class _TreeViewState extends State<TreeView> {
         } else {
           activeNodeIndex = node.index;
         }
+        activeLeafIndex = null;
       });
     }
   }

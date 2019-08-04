@@ -31,10 +31,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
           flex: 1,
           child: Material(
             elevation: 2.0,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: _buildItems(context),
-            ),
+            child: _buildItems(context),
           ),
         ),
         Flexible(

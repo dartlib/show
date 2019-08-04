@@ -2,6 +2,8 @@
 
 ShowCase your flutter app.
 
+![Screenshot](https://raw.githubusercontent.com/dartlib/show/develop/assets/screenshot.png)
+
 ## Getting Started
 
 To install `show` globally use:

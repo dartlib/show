@@ -17,7 +17,8 @@ class GridLayout extends ShowCaseLayout {
         padding: const EdgeInsets.all(10),
         crossAxisCount: 3,
         children: children
-            .map((widget) => Container(
+            .map((widget) => Card(
+                  elevation: 15,
                   key: Key(uuid()),
                   child: widget,
                 ))
