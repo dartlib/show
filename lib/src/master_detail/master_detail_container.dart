@@ -98,7 +98,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
           'assets/logo.png',
           package: 'show',
         ),
-        const SizedBox(width: 8)
+        const SizedBox(width: 8),
         const Text('Showcase'),
       ],
     );
