@@ -10,8 +10,8 @@ class MasterDetailContainer extends StatefulWidget {
   final Set<ShowCase> items;
   final Widget title;
   MasterDetailContainer({
-    @required this.title,
     @required this.items,
+    this.title,
   });
   @override
   _ItemMasterDetailContainerState createState() =>
@@ -85,9 +85,22 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
 
     return Scaffold(
       appBar: AppBar(
-        title: widget.title,
+        title: widget.title ?? _defaultTitle(),
       ),
       body: content,
+    );
+  }
+
+  Widget _defaultTitle() {
+    return Row(
+      children: <Widget>[
+        Image.asset(
+          'assets/logo.png',
+          package: 'show',
+        ),
+        const SizedBox(width: 8)
+        const Text('Showcase'),
+      ],
     );
   }
 }
