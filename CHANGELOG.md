@@ -1,3 +1,6 @@
+## 0.3.1
+  - update menu styling.
+  
 ## 0.3.0
   - add tree menu.
   - add logo.
