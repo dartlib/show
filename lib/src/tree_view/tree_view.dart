@@ -1,110 +1,82 @@
 import 'package:flutter/material.dart';
-import 'package:show/src/tree_view/tree_item.dart';
 
+import 'tree_item.dart';
 import 'tree_node.dart';
+import 'tree_view_child.dart';
+import 'tree_view_data.dart';
 
 typedef TreeItemCallback = Function(TreeNode node);
 
-class TreeView extends InheritedWidget {
-  final List<Widget> children;
+class TreeView extends StatefulWidget {
+  final List<TreeNode> children;
   final bool startExpanded;
+  final TreeItemCallback onTap;
 
   TreeView({
     Key key,
     @required this.children,
+    @required this.onTap,
     this.startExpanded = false,
-  }) : super(
-          key: key,
-          child: _TreeViewData(
-            children: children,
+  }) : super(key: key);
+
+  @override
+  _TreeViewState createState() => _TreeViewState();
+}
+
+class _TreeViewState extends State<TreeView> {
+  int activeNodeIndex;
+
+  @override
+  @override
+  Widget build(BuildContext context) {
+    return TreeViewData(
+      children: _getChildList(widget.children, widget.onTap),
+    );
+  }
+
+  List<Widget> _getChildList(
+      List<TreeNode> childTreeNodes, TreeItemCallback onTap) {
+    return childTreeNodes.map((node) {
+      if (node.isLeafNode) {
+        return Container(
+          margin: const EdgeInsets.only(left: 8),
+          child: TreeViewChild(
+            parent: TreeItem(
+              node: node,
+              expanded: activeNodeIndex == node.index,
+            ),
+            active: activeNodeIndex == node.index,
+            onTap: _onTap,
+            children: _getChildList(node.children, onTap),
           ),
         );
+      }
+      return Container(
+        margin: const EdgeInsets.only(left: 4),
+        child: TreeViewChild(
+          onTap: _onTap,
+          parent: TreeItem(
+            node: node,
+            expanded: activeNodeIndex == node.index,
+          ),
+          active: activeNodeIndex == node.index,
+          children: _getChildList(node.children, onTap),
+        ),
+      );
+    }).toList();
+  }
 
-  @override
-  bool updateShouldNotify(TreeView oldWidget) {
-    if (oldWidget.children == children &&
-        oldWidget.startExpanded == startExpanded) {
-      return false;
+  void _onTap(TreeNode node) {
+    if (node.isLeafNode) {
+      widget.onTap(node);
+    } else {
+      setState(() {
+        if (activeNodeIndex == node.index) {
+          activeNodeIndex = null;
+        } else {
+          activeNodeIndex = node.index;
+        }
+      });
     }
-    return true;
-  }
-}
-
-class _TreeViewData extends StatelessWidget {
-  final List<Widget> children;
-
-  const _TreeViewData({
-    this.children,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: children.length,
-      itemBuilder: (context, index) {
-        return children.elementAt(index);
-      },
-    );
-  }
-}
-
-class TreeViewChild extends StatefulWidget {
-  final bool startExpanded;
-  final TreeItem parent;
-  final List<Widget> children;
-  final TreeItemCallback onTap;
-
-  TreeViewChild({
-    @required this.parent,
-    @required this.children,
-    this.startExpanded = true,
-    this.onTap,
-    Key key,
-  }) : super(key: key) {
-    assert(parent != null);
-    assert(children != null);
-  }
-
-  @override
-  TreeViewChildState createState() => TreeViewChildState();
-}
-
-class TreeViewChildState extends State<TreeViewChild> {
-  bool isExpanded = true;
-
-  @override
-  void initState() {
-    super.initState();
-    isExpanded = widget.startExpanded;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        GestureDetector(
-          child: widget.parent,
-          onTap: widget.parent.node.isLeafNode
-              ? () => widget.onTap(widget.parent.node)
-              : toggleExpanded,
-        ),
-        AnimatedContainer(
-          duration: Duration(milliseconds: 400),
-          child: isExpanded
-              ? Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: widget.children,
-                )
-              : Offstage(),
-        ),
-      ],
-    );
-  }
-
-  void toggleExpanded() {
-    setState(() {
-      isExpanded = !isExpanded;
-    });
   }
 }

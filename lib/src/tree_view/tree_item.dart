@@ -4,29 +4,60 @@ import 'tree_node.dart';
 
 class TreeItem extends StatelessWidget {
   final TreeNode node;
-  final VoidCallback onPressedNext;
+  final bool expanded;
 
   TreeItem({
     @required this.node,
-    this.onPressedNext,
+    this.expanded = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0.0,
-      child: ListTile(
-        leading: !node.isLeafNode
-            ? const Icon(Icons.folder)
-            : Icon(Icons.insert_drive_file),
-        title: Text(node.name),
-        trailing: !node.isLeafNode
-            ? IconButton(
-                icon: Icon(Icons.navigate_next),
-                onPressed: onPressedNext,
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+
+    return Row(
+      children: <Widget>[
+        if (!node.isLeafNode)
+          Icon(
+            expanded ? Icons.arrow_drop_down : Icons.arrow_right,
+            size: 19.0,
+          ),
+        node.isLeafNode
+            ? Padding(
+                padding: const EdgeInsets.only(
+                  top: 6.0,
+                  left: 12.0,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.insert_drive_file,
+                      size: 16.0,
+                      color: theme.primaryColor,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      node.name,
+                      style: textTheme.body1,
+                    ),
+                  ],
+                ))
+            : Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.folder_open,
+                    color: theme.primaryColor,
+                    size: 16.0,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    node.name,
+                    style: textTheme.body2,
+                  ),
+                ],
               )
-            : null,
-      ),
+      ],
     );
   }
 }
