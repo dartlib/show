@@ -1,3 +1,8 @@
+## 0.3.0
+  - add tree menu.
+  - add logo.
+  - make title optional.
+  
 ## 0.2.1
   - update readme.
   
