@@ -13,7 +13,7 @@ class ShowCase {
     this.title,
     this.layout,
   }) {
-    layout ??= Layout.gridLayout;
+    layout ??= Layout.columnLayout;
   }
 
   static Set<ShowCase> import(Iterable<ShowCaseFunction> showCases) {

@@ -1,11 +1,12 @@
+// ignore_for_file: avoid_classes_with_only_static_members
 import 'package:flutter/material.dart';
 
-import 'grid_layout.dart';
-import 'showcase_layout.dart';
+import 'layout_column.dart';
+import 'layout_grid.dart';
 
-typedef LayoutFactory = ShowCaseLayout Function(List<Widget> items);
+typedef LayoutFactory = Widget Function(List<Widget> items);
 
 class Layout {
-  static LayoutFactory gridLayout =
-      (children) => GridLayout(children: children);
+  static LayoutFactory gridLayout = layoutGrid;
+  static LayoutFactory columnLayout = layoutColumn;
 }

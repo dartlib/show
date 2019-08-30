@@ -9,8 +9,13 @@ import 'item_listing.dart';
 class MasterDetailContainer extends StatefulWidget {
   final Set<ShowCase> items;
   final Widget title;
+
+  /// Sets the theme which should be used for displaying your components.
+  /// e.g. your theme.
+  final ThemeData theme;
   MasterDetailContainer({
     @required this.items,
+    this.theme,
     this.title,
   });
   @override
@@ -38,6 +43,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
           flex: 3,
           child: ItemDetails(
             isInTabletLayout: true,
+            theme: widget.theme,
             item: _selectedItem,
           ),
         ),
