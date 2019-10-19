@@ -1,3 +1,6 @@
+## 0.5.0
+  - Breaking, change signature of showcase function
+
 ## 0.4.1
   - expose build context to showcase functions
 
