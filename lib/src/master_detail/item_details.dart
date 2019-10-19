@@ -29,7 +29,9 @@ class ItemDetails extends StatelessWidget {
     }
 
     final children = item.items.map((WidgetFactory factory) {
-      return item.decorator != null ? item.decorator(factory()) : factory();
+      return item.decorator != null
+          ? item.decorator(factory(context))
+          : factory(context);
     }).toList();
 
     final Widget content = Builder(builder: (context) => item.layout(children));

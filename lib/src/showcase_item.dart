@@ -3,7 +3,7 @@ import 'package:show/src/show.dart';
 
 import 'layouts/index.dart';
 
-typedef WidgetFactory = Widget Function();
+typedef WidgetFactory = Widget Function([BuildContext context]);
 
 class ShowCaseItem {
   String title;
