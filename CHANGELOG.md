@@ -1,3 +1,6 @@
+## 0.4.1
+  - expose build context to showcase functions
+
 ## 0.4.0
   - add web builder
   - make main section scrollable
