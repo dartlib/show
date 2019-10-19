@@ -5,23 +5,23 @@ void showCase(Show controls) {
   controls
     ..setTitle('Controls')
     ..setLayout(Layout.gridLayout)
-    ..add('Card', {
-      () => Card(
-            color: Colors.orange,
-          ),
-      () => Card(
-            color: Colors.amber,
-          ),
-      () => InkWell(
-            onTap: action('Hello ShowCase'),
-            child: Card(
-              color: Colors.green,
+    ..add(
+      'Card',
+      List.generate(
+        62,
+        (int index) => () => InkWell(
+              onTap: action('Hello $index'),
+              child: Card(
+                color: Colors.blue.withAlpha(index * 4),
+                child: Center(
+                  child: Text(
+                    index.toString(),
+                  ),
+                ),
+              ),
             ),
-          ),
-      () => Card(
-            color: Colors.yellow,
-          ),
-    })
+      ).toSet(),
+    )
     ..add('CircularProgressIndicator', {
       () => const CircularProgressIndicator(),
       () => const CircularProgressIndicator(

@@ -1,18 +1,22 @@
+## 0.4.0
+  - add web builder
+  - make main section scrollable
+
 ## 0.3.2
   - inject theme
   - change default layout
-  
+
 ## 0.3.1
   - update menu styling
-  
+
 ## 0.3.0
   - add tree menu
   - add logo
   - make title optional
-  
+
 ## 0.2.1
   - update readme
-  
+
 ## 0.2.0
   - hot reload show cases
   - fix font sizes

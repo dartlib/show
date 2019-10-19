@@ -13,6 +13,7 @@ class VersionCommand extends ShowCommand {
   @override
   String get invocation => '`show` version';
 
+  @override
   void run() {
     log.message('Pub $version');
   }

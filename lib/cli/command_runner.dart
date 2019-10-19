@@ -8,6 +8,7 @@ import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 
 import '../version.dart';
+import 'command/build.dart';
 import 'command/init.dart';
 import 'command/version.dart';
 import 'log.dart';
@@ -38,6 +39,7 @@ class ShowCaseCommandRunner extends CommandRunner {
           abbr: 'v', negatable: false, help: 'Shortcut for "--verbosity=all".');
 
     addCommand(InitCommand());
+    addCommand(BuildCommand());
     addCommand(VersionCommand());
   }
 
@@ -74,7 +76,7 @@ class ShowCaseCommandRunner extends CommandRunner {
         break;
     }
 
-    log.fine('Pub $version');
+    log.fine('Showcase $version');
 
     await super.runCommand(topLevelResults);
   }

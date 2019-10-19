@@ -72,3 +72,10 @@ void showCase(Show controls) {
     });
 }
 ```
+
+### Development
+
+To activate the show package globally from within the develop directory use:
+```dart
+flutter pub global activate --source path <repository_path>
+```
