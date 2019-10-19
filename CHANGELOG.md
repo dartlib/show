@@ -1,3 +1,6 @@
+## 0.5.1
+  - Update readme to use new api.
+
 ## 0.5.0
   - Breaking, change signature of showcase function
 
