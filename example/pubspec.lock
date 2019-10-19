@@ -735,13 +735,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.15"
-  webdev:
-    dependency: transitive
-    description:
-      name: webdev
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.5.3"
   webkit_inspection_protocol:
     dependency: transitive
     description:

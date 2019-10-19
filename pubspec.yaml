@@ -26,8 +26,6 @@ dependencies:
   flutter_tools:
     sdk: flutter
 
-  webdev: ^2.5.0
-
   build: ^1.2.0
   build_runner_core: ^4.1.0
   logging: 0.11.3+2

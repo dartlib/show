@@ -23,8 +23,8 @@ class ItemDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (item == null) {
-      return Center(
-        child: const Text('Choose an item on the left'),
+      return const Center(
+        child: Text('Choose an item on the left'),
       );
     }
 
@@ -45,11 +45,25 @@ class ItemDetails extends StatelessWidget {
       } else {
         child = content;
       }
+
       return Column(
         children: [
           Expanded(
             flex: 5,
-            child: child,
+            child: CustomScrollView(
+              slivers: <Widget>[
+                SliverFillRemaining(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Expanded(
+                        child: child,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           Expanded(
             flex: 3,
