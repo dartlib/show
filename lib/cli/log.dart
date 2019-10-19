@@ -8,11 +8,11 @@ class LogLevel {
 class Logger {
   int level = LogLevel.normal;
 
-  message(String message) {
+  void message(String message) {
     print(message);
   }
 
-  fine(String message) {}
+  void fine(String message) {}
 }
 
 final log = Logger();
