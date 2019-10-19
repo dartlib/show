@@ -3,17 +3,18 @@ import 'package:show/src/show.dart';
 
 import 'layouts/index.dart';
 
-typedef WidgetFactory = Widget Function([BuildContext context]);
+typedef WidgetFactory = Widget Function();
+typedef ShowCaseFactory = Set<Widget> Function(BuildContext);
 
 class ShowCaseItem {
   String title;
-  Set<WidgetFactory> items;
+  ShowCaseFactory showCaseFactory;
   LayoutFactory layout;
   DecoratorFactory decorator;
   ShowCaseItem({
-    this.title,
-    this.layout,
-    this.decorator,
-    this.items,
+    @required this.title,
+    @required this.layout,
+    @required this.decorator,
+    @required this.showCaseFactory,
   });
 }
