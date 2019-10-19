@@ -36,7 +36,7 @@ class Show {
 
   void add(
     String title,
-    Set<WidgetFactory> factory, {
+    Set<Widget> Function(BuildContext context) showCaseFactory, {
     LayoutFactory layout,
   }) {
     showCase.items.add(
@@ -44,7 +44,7 @@ class Show {
         title: title,
         layout: layout ?? showCase.layout,
         decorator: showCase.decorator,
-        items: factory,
+        showCaseFactory: showCaseFactory,
       ),
     );
   }
