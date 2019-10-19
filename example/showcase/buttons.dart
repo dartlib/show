@@ -6,6 +6,19 @@ void showCase(Show buttons) {
     ..setTitle('Buttons')
     ..setLayout(Layout.columnLayout)
     ..add('FlatButton', {
+      () => const Align(
+            alignment: Alignment.centerLeft,
+            child: RotatedBox(
+              quarterTurns: 1,
+              child: Text(
+                '76',
+                style: TextStyle(
+                  fontSize: 200,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
       () => FlatButton(
             child: const Text('FlatButton'),
             onPressed: action('Pressed'),

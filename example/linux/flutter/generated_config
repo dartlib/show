@@ -1,0 +1,6 @@
+# Generated code do not commit.
+export FLUTTER_ROOT=/home/rhalff/flutter
+export BUILD=debug
+export TRACK_WIDGET_CREATION=false
+export FLUTTER_TARGET=/srv/data/git/dartlib/showcase/example/showcase/showcase.dart
+export PROJECT_DIR=/srv/data/git/dartlib/showcase/example

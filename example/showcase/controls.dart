@@ -6,19 +6,19 @@ void showCase(Show controls) {
     ..setTitle('Controls')
     ..setLayout(Layout.gridLayout)
     ..add('Card', {
-      () => Card(
+      () => const Card(
             color: Colors.orange,
           ),
-      () => Card(
+      () => const Card(
             color: Colors.amber,
           ),
       () => InkWell(
             onTap: action('Hello ShowCase'),
-            child: Card(
+            child: const Card(
               color: Colors.green,
             ),
           ),
-      () => Card(
+      () => const Card(
             color: Colors.yellow,
           ),
     })

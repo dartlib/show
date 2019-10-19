@@ -13,11 +13,12 @@ dependencies:
   show:
     path: ../
 
-  cupertino_icons: ^0.1.2
+  # cupertino_icons: ^0.1.2
 
 dev_dependencies:
   build_test: ^0.10.8
   build_runner: ^1.6.5
+  build_web_compilers: 2.6.0
   flutter_test:
     sdk: flutter
 
