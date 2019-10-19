@@ -46,36 +46,41 @@ void showCase(Show controls) {
   controls
     ..setTitle('Controls')
     ..setLayout(Layout.gridLayout)
-    ..add('Card', {
-      () => Card(
-            color: Colors.orange,
-          ),
-      () => InkWell(
+    ..add('Card', () => {
+      Card(color: Colors.orange),
+      InkWell(
             onTap: action('Hello ShowCase'),
             child: Card(
               color: Colors.green,
             ),
           ),
-      () => Card(
-            color: Colors.yellow,
-          ),
+      Card(color: Colors.yellow),
     })
-    ..add('CircularProgressIndicator', {
-      () => const CircularProgressIndicator(),
-      () => const CircularProgressIndicator(
+    ..add('CircularProgressIndicator', (_) => {
+      const CircularProgressIndicator(),
+      const CircularProgressIndicator(
             backgroundColor: Colors.pink,
             strokeWidth: 10,
           ),
-      () => const CircularProgressIndicator(
+      const CircularProgressIndicator(
             value: 0.4,
           ),
     });
 }
 ```
 
+### Build Web Version
+
+To build a web version use:
+```bash
+show build
+```
+
+The build will be written to `build/showcase/web`.
+
 ### Development
 
 To activate the show package globally from within the develop directory use:
-```dart
+```bash
 flutter pub global activate --source path <repository_path>
 ```
