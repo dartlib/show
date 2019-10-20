@@ -244,6 +244,13 @@ packages:
       relative: true
     source: path
     version: "0.0.0"
+  flutter_staggered_grid_view:
+    dependency: transitive
+    description:
+      name: flutter_staggered_grid_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   flutter_svg:
     dependency: transitive
     description:
@@ -582,7 +589,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.4.1"
+    version: "0.5.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -758,4 +765,4 @@ packages:
     version: "2.2.0"
 sdks:
   dart: ">=2.5.0 <3.0.0"
-  flutter: ">=1.5.9-pre.94 <2.0.0"
+  flutter: ">=1.6.0 <2.0.0"
