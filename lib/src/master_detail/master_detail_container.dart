@@ -3,6 +3,7 @@ import 'package:show/src/tree_view/tree_node.dart';
 
 import '../../show.dart';
 import '../showcase.dart';
+import 'dragger.dart';
 import 'item_details.dart';
 import 'item_listing.dart';
 
@@ -28,25 +29,100 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
 
   int _selectedItemIndex;
   int _selectedShowCaseIndex;
+  double sideBarWidth = 200;
+  double minSideBarWidth = 200;
+  double infoPanelHeight = 300;
+  double minInfoPanelHeight = 100;
+
+  void _onDragSideBarUpdate(Offset position, Offset delta) {
+    print(position);
+    setState(() {
+      if (sideBarWidth >= minSideBarWidth || !delta.dx.isNegative) {
+        sideBarWidth += delta.dx;
+      }
+    });
+  }
+
+  void _onDragInfoPanelUpdate(Offset position, Offset delta) {
+    print(position);
+    setState(() {
+      if (infoPanelHeight >= minInfoPanelHeight || delta.dy.isNegative) {
+        infoPanelHeight -= delta.dy;
+      }
+    });
+  }
 
   Widget _buildTabletLayout() {
+    final theme = Theme.of(context);
+
+    final handleColor = theme.primaryColor.withAlpha(150);
+
     return Row(
       children: <Widget>[
-        Flexible(
-          flex: 1,
+        Container(
+          width: sideBarWidth,
           child: Material(
             elevation: 2.0,
             child: _buildItems(context),
           ),
         ),
-        Flexible(
-          flex: 3,
-          child: ItemDetails(
-            isInTabletLayout: true,
-            theme: widget.theme,
-            item: _selectedItem,
+        Dragger(
+          axis: Axis.horizontal,
+          onDragUpdate: _onDragSideBarUpdate,
+          child: SizedBox(
+            width: 5,
+            child: Container(
+              color: handleColor,
+            ),
           ),
         ),
+        Flexible(
+            flex: 3,
+            child: _selectedItem == null
+                ? const Center(child: Text('Choose an item on the left'))
+                : Column(
+                    children: <Widget>[
+                      Flexible(
+                        flex: 3,
+                        child: CustomScrollView(
+                          slivers: <Widget>[
+                            if (_selectedItem.description != null)
+                              SliverToBoxAdapter(
+                                child: Container(
+                                  decoration:
+                                      BoxDecoration(border: Border.all()),
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(_selectedItem.description),
+                                ),
+                              ),
+                            SliverFillRemaining(
+                              child: ItemDetails(
+                                isInTabletLayout: true,
+                                theme: widget.theme,
+                                item: _selectedItem,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Dragger(
+                        axis: Axis.vertical,
+                        onDragUpdate: _onDragInfoPanelUpdate,
+                        child: SizedBox(
+                          height: 5,
+                          child: Container(
+                            color: handleColor,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: infoPanelHeight,
+                        child: Card(
+                          child: Logger(),
+                        ),
+                      )
+                    ],
+                  )),
       ],
     );
   }

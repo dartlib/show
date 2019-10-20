@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-import '../logger.dart';
 import '../showcase_item.dart';
 
 /// Shows the showcase items within a given layout.
@@ -18,16 +17,10 @@ class ItemDetails extends StatelessWidget {
     @required this.isInTabletLayout,
     @required this.item,
     this.theme,
-  });
+  }) : assert(item != null);
 
   @override
   Widget build(BuildContext context) {
-    if (item == null) {
-      return const Center(
-        child: Text('Choose an item on the left'),
-      );
-    }
-
     final items = item.showCaseFactory(context);
 
     final children = items.map((Widget widget) {
@@ -52,27 +45,8 @@ class ItemDetails extends StatelessWidget {
         children: [
           Expanded(
             flex: 5,
-            child: CustomScrollView(
-              slivers: <Widget>[
-                SliverFillRemaining(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      Expanded(
-                        child: child,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            child: child,
           ),
-          Expanded(
-            flex: 3,
-            child: Card(
-              child: Logger(),
-            ),
-          )
         ],
       );
     }

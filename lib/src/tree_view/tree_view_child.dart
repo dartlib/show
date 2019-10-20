@@ -57,13 +57,13 @@ class TreeViewChildState extends State<TreeViewChild> {
                 onTap: () => widget.onTap(widget.parent.node),
               ),
         AnimatedContainer(
-          duration: Duration(milliseconds: 400),
+          duration: const Duration(milliseconds: 400),
           child: widget.active
               ? Column(
                   mainAxisSize: MainAxisSize.min,
                   children: widget.children,
                 )
-              : Offstage(),
+              : const Offstage(),
         ),
       ],
     );
