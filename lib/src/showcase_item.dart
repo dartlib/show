@@ -7,14 +7,16 @@ typedef WidgetFactory = Widget Function();
 typedef ShowCaseFactory = Set<Widget> Function(BuildContext);
 
 class ShowCaseItem {
-  String title;
-  ShowCaseFactory showCaseFactory;
-  LayoutFactory layout;
-  DecoratorFactory decorator;
-  ShowCaseItem({
+  final String title;
+  final String description;
+  final ShowCaseFactory showCaseFactory;
+  final LayoutFactory layout;
+  final DecoratorFactory decorator;
+  const ShowCaseItem({
     @required this.title,
     @required this.layout,
     @required this.decorator,
     @required this.showCaseFactory,
+    this.description,
   });
 }

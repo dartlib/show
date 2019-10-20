@@ -7,6 +7,7 @@ typedef ShowCaseFunction = void Function(Show show);
 class ShowCase {
   Set<ShowCaseItem> items = {};
   String title;
+  String description;
   LayoutFactory layout;
   DecoratorFactory decorator;
   ShowCase({
