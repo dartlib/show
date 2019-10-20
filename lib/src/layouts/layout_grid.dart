@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:show/show.dart';
 
-final layoutGrid = (List<Widget> children) => Card(
-      child: GridView.count(
-        shrinkWrap: true,
-        childAspectRatio: 3,
-        padding: const EdgeInsets.all(10),
-        crossAxisCount: 3,
-        children: children,
+LayoutFactory layoutGrid({
+  int crossAxisCount = 3,
+  EdgeInsets padding = const EdgeInsets.all(10),
+}) {
+  return (List<Widget> children) {
+    return Scrollbar(
+      child: StaggeredGridView.countBuilder(
+        itemCount: children.length,
+        crossAxisCount: crossAxisCount,
+        padding: padding,
+        staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
+        itemBuilder: (BuildContext context, int index) => children[index],
       ),
     );
+  };
+}

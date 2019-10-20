@@ -1,6 +1,6 @@
 name: show
 description: Showcase your flutter widgets.
-version: 0.5.1
+version: 0.5.2
 author: Rob Halff <rob.halff@gmail.com>
 homepage: https://github.com/dartlib/show
 repository: https://github.com/dartlib/show.git
@@ -12,6 +12,7 @@ executables:
   show:
 
 dependencies:
+  flutter_staggered_grid_view: ^0.3.0
   process_run: ^0.10.3
   flutter_svg: ^0.14.2
   analyzer: '>=0.35.0 <0.38.0'

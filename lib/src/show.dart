@@ -15,6 +15,10 @@ class Show {
     showCase.title = title;
   }
 
+  void setDescription(String description) {
+    showCase.description = description;
+  }
+
   void setLayout(LayoutFactory layout) {
     showCase.layout = layout;
   }
@@ -38,12 +42,15 @@ class Show {
     String title,
     Set<Widget> Function(BuildContext context) showCaseFactory, {
     LayoutFactory layout,
+    DecoratorFactory decorator,
+    String description,
   }) {
     showCase.items.add(
       ShowCaseItem(
         title: title,
+        description: description,
         layout: layout ?? showCase.layout,
-        decorator: showCase.decorator,
+        decorator: decorator ?? showCase.decorator,
         showCaseFactory: showCaseFactory,
       ),
     );

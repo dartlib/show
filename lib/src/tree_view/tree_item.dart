@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'tree_node.dart';
@@ -35,11 +36,12 @@ class TreeItem extends StatelessWidget {
                     Icon(
                       Icons.insert_drive_file,
                       size: 16.0,
-                      color: theme.primaryColor,
+                      color: theme.primaryColorLight,
                     ),
                     const SizedBox(width: 4),
                     Text(
                       node.name,
+                      overflow: TextOverflow.clip,
                       style: textTheme.body1,
                     ),
                   ],

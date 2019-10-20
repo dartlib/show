@@ -8,72 +8,78 @@ void showCase(Show buttons) {
     ..add(
       'FlatButton',
       (_) => {
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: RotatedBox(
-            quarterTurns: 1,
-            child: Text(
-              '76',
-              style: TextStyle(
-                fontSize: 200,
-                fontWeight: FontWeight.bold,
-              ),
+        ButtonBar(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            FlatButton(
+              child: const Text('FLAT BUTTON', semanticsLabel: 'FLAT BUTTON 1'),
+              onPressed: action('FLAT BUTTON 1'),
             ),
-          ),
+            const FlatButton(
+              child: Text(
+                'DISABLED',
+                semanticsLabel: 'DISABLED BUTTON 3',
+              ),
+              onPressed: null,
+            ),
+          ],
         ),
-        FlatButton(
-          child: const Text('FlatButton'),
-          onPressed: action('Pressed'),
-        ),
-        FlatButton(
-          color: Colors.blue,
-          textColor: Colors.white,
-          disabledColor: Colors.grey,
-          disabledTextColor: Colors.black,
-          padding: const EdgeInsets.all(8.0),
-          splashColor: Colors.blueAccent,
-          onPressed: () {
-            /*...*/
-          },
-          child: const Text(
-            'Flat Button',
-            style: TextStyle(fontSize: 20.0),
-          ),
+        ButtonBar(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            FlatButton.icon(
+              icon: const Icon(Icons.add_circle_outline, size: 18.0),
+              label: const Text('FLAT BUTTON', semanticsLabel: 'FLAT BUTTON 2'),
+              onPressed: action('FLAT BUTTON 2'),
+            ),
+            FlatButton.icon(
+              icon: const Icon(Icons.add_circle_outline, size: 18.0),
+              label:
+                  const Text('DISABLED', semanticsLabel: 'DISABLED BUTTON 4'),
+              onPressed: null,
+            ),
+          ],
         ),
       },
+      description: 'These are the Flat Buttons',
     )
     ..add(
-      'RaisedButton',
+      'OutlineButton',
       (_) => {
-        const RaisedButton(
-          onPressed: null,
-          child: Text('Disabled Button', style: TextStyle(fontSize: 20)),
-        ),
-        RaisedButton(
-          onPressed: action('Pressed'),
-          child: const Text(
-            'Enabled Button',
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-        RaisedButton(
-          onPressed: action('Pressed'),
-          textColor: Colors.white,
-          padding: const EdgeInsets.all(0.0),
-          child: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: <Color>[
-                  Color(0xFF0D47A1),
-                  Color(0xFF1976D2),
-                  Color(0xFF42A5F5),
-                ],
-              ),
+        ButtonBar(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            OutlineButton(
+              child: const Text('OUTLINE BUTTON',
+                  semanticsLabel: 'OUTLINE BUTTON 1'),
+              onPressed: () {
+                // Perform some action
+              },
             ),
-            padding: const EdgeInsets.all(10.0),
-            child:
-                const Text('Gradient Button', style: TextStyle(fontSize: 20)),
-          ),
+            const OutlineButton(
+              child: Text('DISABLED', semanticsLabel: 'DISABLED BUTTON 5'),
+              onPressed: null,
+            ),
+          ],
+        ),
+        ButtonBar(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            OutlineButton.icon(
+              icon: const Icon(Icons.add, size: 18.0),
+              label: const Text('OUTLINE BUTTON',
+                  semanticsLabel: 'OUTLINE BUTTON 2'),
+              onPressed: () {
+                // Perform some action
+              },
+            ),
+            OutlineButton.icon(
+              icon: const Icon(Icons.add, size: 18.0),
+              label:
+                  const Text('DISABLED', semanticsLabel: 'DISABLED BUTTON 6'),
+              onPressed: null,
+            ),
+          ],
         ),
       },
     );
