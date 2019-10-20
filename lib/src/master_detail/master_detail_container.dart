@@ -166,6 +166,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
       appBar: AppBar(
         title: widget.title ?? _defaultTitle(),
       ),
+      resizeToAvoidBottomInset: false, // avoid overflow on keyboard input.
       body: content,
     );
   }
