@@ -1,3 +1,6 @@
+## 0.5.2
+  - Make area dividers draggable.
+
 ## 0.5.1
   - Update readme to use new api.
 
