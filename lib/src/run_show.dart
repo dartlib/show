@@ -21,7 +21,6 @@ void runShow({
 
   runApp(
     UIWidget(
-      showCases: showCases,
       theme: theme,
       api: Api.instance,
     ),

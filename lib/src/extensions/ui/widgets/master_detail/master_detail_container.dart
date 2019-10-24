@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:show/show.dart';
 import 'package:show/src/api/channel_builder.dart';
-import 'package:show/src/core/showcase.dart';
 import 'package:show/src/extensions/showcases/showcases_extension_state.dart';
 import 'package:show/src/extensions/ui/ui_extension_events.dart';
 
@@ -11,7 +10,6 @@ import 'info_panel.dart';
 import 'item_details.dart';
 
 class MasterDetailContainer extends StatefulWidget {
-  final Set<ShowCase> items;
   final Widget title;
   final Api api;
 
@@ -19,12 +17,10 @@ class MasterDetailContainer extends StatefulWidget {
   /// e.g. your theme.
   final ThemeData theme;
   MasterDetailContainer({
-    @required this.items,
     @required this.api,
     this.theme,
     this.title,
-  })  : assert(items != null),
-        assert(api != null);
+  }) : assert(api != null);
   @override
   _ItemMasterDetailContainerState createState() =>
       _ItemMasterDetailContainerState();
