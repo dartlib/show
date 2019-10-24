@@ -9,7 +9,7 @@ import 'package:show/src/extensions/showcases/showcases_extension_event.dart';
 import 'package:show/src/extensions/ui/widgets/tree_view/tree_node.dart';
 import 'package:show/src/extensions/ui/widgets/tree_view/tree_view.dart';
 
-import 'showcases_extension_state.dart';
+import '../showcases_extension_state.dart';
 
 class ShowCasesPanel extends Panel {
   @override

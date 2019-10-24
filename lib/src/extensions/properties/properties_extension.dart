@@ -4,8 +4,8 @@ import 'package:show/src/extensions/ui/ui_extension_events.dart';
 import 'package:show/src/extensions/ui/widgets/showcase_item_widget_events.dart';
 
 import '../../api.dart';
+import 'panels/properties_panel.dart';
 import 'properties_extension_events.dart';
-import 'properties_panel.dart';
 import 'property_container.dart';
 
 class PropertiesExtension extends Extension {

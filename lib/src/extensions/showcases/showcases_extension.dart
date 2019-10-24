@@ -5,7 +5,7 @@ import 'package:show/src/core/showcase_item.dart';
 import 'package:show/src/extensions/showcases/showcases_extension_event.dart';
 import 'package:show/src/extensions/ui/ui_extension_events.dart';
 
-import 'show_cases_panel.dart';
+import 'panels/show_cases_panel.dart';
 import 'showcases_extension_state.dart';
 
 class ShowCasesExtension extends Extension {
