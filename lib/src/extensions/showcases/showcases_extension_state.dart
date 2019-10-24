@@ -5,8 +5,6 @@ import 'package:show/src/core/showcase_item.dart';
 
 abstract class ShowCaseExtensionState extends State {}
 
-class LoadShowCasesState extends ShowCaseExtensionState {}
-
 class ShowCasesLoadedState extends ShowCaseExtensionState {
   Set<ShowCase> showCases;
   ShowCasesLoadedState({

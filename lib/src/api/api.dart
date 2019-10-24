@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:show/show.dart';
-import 'package:show/src/core/panel.dart';
 
 import 'channel.dart';
 import 'event.dart';
@@ -10,7 +9,6 @@ import 'extension.dart';
 class Api {
   final channel = Channel();
   final _extensions = <Type, Extension>{};
-  final _panels = <Panel>[];
   StreamSubscription _allEventsSubscription;
 
   Api._internal();
@@ -33,14 +31,6 @@ class Api {
 
   void dispose() {
     _allEventsSubscription.cancel();
-  }
-
-  void addPanel(Panel panel) {
-    _panels.add(panel);
-  }
-
-  List<Panel> getPanels() {
-    return _panels;
   }
 
   void registerExtension(Extension extension) {
