@@ -2,8 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:show/show.dart';
 import 'package:show/src/core/showcase_item.dart';
 
-import 'showcase_item_widget_events.dart';
-
 class ShowCaseItemWidget extends StatefulWidget {
   final Api api;
 
@@ -26,26 +24,6 @@ class ShowCaseItemWidget extends StatefulWidget {
 }
 
 class _ShowCaseItemWidgetState extends State<ShowCaseItemWidget> {
-  @override
-  void initState() {
-    widget.api.channel.fire(
-      ShowCaseItemEnterEvent(
-        showCaseItem: widget.showCaseItem,
-      ),
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    widget.api.channel.fire(
-      ShowCaseItemLeaveEvent(
-        showCaseItem: widget.showCaseItem,
-      ),
-    );
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return widget.child;

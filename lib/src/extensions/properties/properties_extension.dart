@@ -1,7 +1,7 @@
 import 'package:show/src/api/event.dart';
 import 'package:show/src/api/extension.dart';
+import 'package:show/src/extensions/showcases/showcases_extension_event.dart';
 import 'package:show/src/extensions/ui/ui_extension_events.dart';
-import 'package:show/src/extensions/ui/widgets/showcase_item_widget_events.dart';
 
 import '../../api.dart';
 import 'panels/properties_panel.dart';
@@ -37,9 +37,9 @@ class PropertiesExtension extends Extension {
         event.name,
         event.value,
       );
-    } else if (event is ShowCaseItemEnterEvent) {
-    } else if (event is ShowCaseItemLeaveEvent) {
-      _propertyContainerMap.remove(event.showCaseItem.id);
+    } else if (event is SelectShowCaseItemEvent) {
+    } else if (event is UnloadShowCaseItemEvent) {
+      _propertyContainerMap.remove(event.item.id);
     }
   }
 

@@ -27,3 +27,10 @@ class SelectShowCaseItemEvent extends ShowCaseExtensionEvent {
     @required this.item,
   });
 }
+
+class UnloadShowCaseItemEvent extends ShowCaseExtensionEvent {
+  final ShowCaseItem item;
+  UnloadShowCaseItemEvent({
+    @required this.item,
+  });
+}

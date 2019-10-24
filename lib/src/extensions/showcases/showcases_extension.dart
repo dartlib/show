@@ -33,6 +33,9 @@ class ShowCasesExtension extends Extension {
     } else if (event is LoadShowCasesEvent) {
       channel.fire(ShowCasesLoadedState(showCases: _showCases));
     } else if (event is SelectShowCaseItemEvent) {
+      if (_currentShowCaseItem != null) {
+        channel.fire(UnloadShowCaseItemEvent(item: _currentShowCaseItem));
+      }
       _currentShowCaseItem = event.item;
       channel.fire(ShowCaseItemLoadedState(item: _currentShowCaseItem));
     }
