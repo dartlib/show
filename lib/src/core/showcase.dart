@@ -1,5 +1,5 @@
-import 'layouts/index.dart';
-import 'show.dart';
+import 'package:show/show.dart';
+
 import 'showcase_item.dart';
 
 typedef ShowCaseFunction = void Function(Show show);
@@ -14,7 +14,7 @@ class ShowCase {
     this.title,
     this.layout,
   }) {
-    layout ??= Layout.columnLayout;
+    layout ??= Layout.columnLayout();
   }
 
   static Set<ShowCase> import(Iterable<ShowCaseFunction> showCases) {

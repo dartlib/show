@@ -4,7 +4,7 @@ import 'package:show/show.dart';
 void showCase(Show chips) {
   chips
     ..setTitle('Chips')
-    ..setLayout((children, [BuildContext context]) => Row(children: children))
+    ..setLayout((children) => Row(children: children))
     ..add(
       'Chip',
       (_) => {

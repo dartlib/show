@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:show/src/showcase_item.dart';
 
-import 'layouts/index.dart';
+import '../layouts/index.dart';
 import 'showcase.dart';
+import 'showcase_item.dart';
 
 typedef DecoratorFactory = Widget Function(Widget child);
 
@@ -45,8 +45,17 @@ class Show {
     DecoratorFactory decorator,
     String description,
   }) {
+    final id = _createPath(title);
+
+    final idExists = showCase.items.any((item) => item.id == id);
+
+    if (idExists) {
+      throw Exception('Path $id must be unique, try changing the title');
+    }
+
     showCase.items.add(
       ShowCaseItem(
+        id: id,
         title: title,
         description: description,
         layout: layout ?? showCase.layout,
@@ -54,5 +63,9 @@ class Show {
         showCaseFactory: showCaseFactory,
       ),
     );
+  }
+
+  String _createPath(String title) {
+    return '${showCase.title}/$title';
   }
 }

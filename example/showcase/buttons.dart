@@ -4,15 +4,18 @@ import 'package:show/show.dart';
 void showCase(Show buttons) {
   buttons
     ..setTitle('Buttons')
-    ..setLayout(Layout.columnLayout)
+    ..setLayout(Layout.columnLayout())
     ..add(
       'FlatButton',
-      (_) => {
+      (context) => {
         ButtonBar(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             FlatButton(
-              child: const Text('FLAT BUTTON', semanticsLabel: 'FLAT BUTTON 1'),
+              child: Text(
+                Prop<String>('FlatButtonText', 'FlatButton').of(context),
+                semanticsLabel: 'FLAT BUTTON 1',
+              ),
               onPressed: action('FLAT BUTTON 1'),
             ),
             const FlatButton(

@@ -4,7 +4,7 @@ import 'package:show/show.dart';
 void showCase(Show controls) {
   controls
     ..setTitle('Controls')
-    ..setLayout(Layout.gridLayout)
+    ..setLayout(Layout.gridLayout())
     ..add(
       'Card',
       (_) => List.generate(
@@ -26,7 +26,7 @@ void showCase(Show controls) {
         ),
       ).toSet(),
     )
-    ..setLayout(Layout.gridLayout2)
+    ..setLayout(Layout.gridLayout())
     ..decorate((child) {
       return Container(
         width: 100,

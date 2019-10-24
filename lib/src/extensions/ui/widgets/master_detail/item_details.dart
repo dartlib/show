@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:show/src/api.dart';
+import 'package:show/src/core/showcase_item.dart';
 
-import '../showcase_item.dart';
+import '../showcase_item_widget.dart';
 
 /// Shows the showcase items within a given layout.
 ///
@@ -21,13 +23,19 @@ class ItemDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final items = item.showCaseFactory(context);
+    final Widget showCaseItemWidget = ShowCaseItemWidget(
+      api: Api.instance,
+      showCaseItem: item,
+      child: Builder(builder: (context) {
+        final items = item.showCaseFactory(context);
 
-    final children = items.map((Widget widget) {
-      return item.decorator != null ? item.decorator(widget) : widget;
-    }).toList();
+        final children = items.map((Widget widget) {
+          return item.decorator != null ? item.decorator(widget) : widget;
+        }).toList();
 
-    final Widget content = Builder(builder: (context) => item.layout(children));
+        return item.layout(children);
+      }),
+    );
 
     if (isInTabletLayout) {
       Widget child;
@@ -35,10 +43,10 @@ class ItemDetails extends StatelessWidget {
       if (theme != null) {
         child = Theme(
           data: theme,
-          child: content,
+          child: showCaseItemWidget,
         );
       } else {
-        child = content;
+        child = showCaseItemWidget;
       }
 
       return Column(
@@ -55,7 +63,7 @@ class ItemDetails extends StatelessWidget {
       appBar: AppBar(
         title: Text(item.title),
       ),
-      body: Center(child: content),
+      body: Center(child: showCaseItemWidget),
     );
   }
 }
