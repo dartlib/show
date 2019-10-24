@@ -1,5 +1,6 @@
 import 'package:show/src/api/event.dart';
 import 'package:show/src/api/extension.dart';
+import 'package:show/src/extensions/properties/properties_extension_state.dart';
 import 'package:show/src/extensions/showcases/showcases_extension_event.dart';
 import 'package:show/src/extensions/ui/ui_extension_events.dart';
 
@@ -37,9 +38,28 @@ class PropertiesExtension extends Extension {
         event.name,
         event.value,
       );
+    } else if (event is LoadPropertiesEvent) {
+      _setPropertiesLoadedState(event.showCaseItemId);
     } else if (event is SelectShowCaseItemEvent) {
-    } else if (event is UnloadShowCaseItemEvent) {
-      _propertyContainerMap.remove(event.item.id);
+      _setPropertiesLoadedState(event.item.id);
+    }
+  }
+
+  void _setPropertiesLoadedState(String itemId) {
+    if (_propertyContainerMap.containsKey(itemId)) {
+      final propertyContainer = _propertyContainerMap[itemId];
+
+      channel.setState<PropertiesLoadedState>(
+        PropertiesLoadedState(
+          properties: propertyContainer.values.toList(),
+        ),
+      );
+    } else {
+      channel.setState<PropertiesLoadedState>(
+        PropertiesLoadedState(
+          properties: [],
+        ),
+      );
     }
   }
 
@@ -50,7 +70,9 @@ class PropertiesExtension extends Extension {
       propertyContainer.set<T>(titleKey, defaultValue);
     }
 
-    return propertyContainer.get<T>(titleKey);
+    final def = propertyContainer.get(titleKey);
+
+    return def.value as T;
   }
 
   void setProp<T>(String showCaseItemId, String titleKey, T value) {

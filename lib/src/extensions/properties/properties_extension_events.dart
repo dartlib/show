@@ -15,3 +15,10 @@ class PropertyUpdateEvent<T> extends PropertiesExtensionEvent {
         assert(name != null),
         assert(value != null);
 }
+
+class LoadPropertiesEvent extends PropertiesExtensionEvent {
+  final String showCaseItemId;
+  LoadPropertiesEvent({
+    @required this.showCaseItemId,
+  });
+}

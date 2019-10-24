@@ -18,15 +18,23 @@ class UIExtension extends Extension {
     if (event is AddMenuEvent) {
       _menus.add(event.panel);
 
-      channel.fire(MenusState(panels: _menus));
+      channel.setState<MenusState>(
+        MenusState(panels: _menus),
+      );
     } else if (event is LoadMenusEvent) {
-      channel.fire(MenusState(panels: _menus));
+      channel.setState<MenusState>(
+        MenusState(panels: _menus),
+      );
     } else if (event is AddPanelEvent) {
       _panels.add(event.panel);
 
-      channel.fire(PanelsState(panels: _panels));
+      channel.setState<PanelsState>(
+        PanelsState(panels: _panels),
+      );
     } else if (event is LoadPanelsEvent) {
-      channel.fire(PanelsState(panels: _panels));
+      channel.setState<PanelsState>(
+        PanelsState(panels: _panels),
+      );
     }
   }
 }

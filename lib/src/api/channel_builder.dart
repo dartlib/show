@@ -13,7 +13,6 @@ class ChannelBuilder<T extends api.State> extends StatefulWidget {
     @required this.channel,
     @required this.builder,
     this.onListen,
-    this.initialData,
     Key key,
   })  : assert(builder != null),
         assert(channel != null),
@@ -22,10 +21,9 @@ class ChannelBuilder<T extends api.State> extends StatefulWidget {
   final Channel channel;
   final ChannelCallback onListen;
   final AsyncWidgetBuilder<T> builder;
-  final T initialData;
 
   AsyncSnapshot<T> initial() {
-    return AsyncSnapshot<T>.withData(ConnectionState.none, initialData);
+    return AsyncSnapshot<T>.withData(ConnectionState.none, null);
   }
 
   AsyncSnapshot<T> afterConnected(AsyncSnapshot<T> current) {
@@ -78,9 +76,9 @@ class _ChannelBuilderState<T extends api.State>
     super.dispose();
   }
 
-  void _subscribe() {
+  Future<void> _subscribe() async {
     if (widget.channel != null) {
-      _stream = widget.channel.on<T>();
+      _stream = widget.channel.getState<T>();
 
       _subscription = _stream.listen((T data) {
         setState(() {
@@ -95,6 +93,7 @@ class _ChannelBuilderState<T extends api.State>
           _state = widget.afterDone(_state);
         });
       });
+
       _state = widget.afterConnected(_state);
     }
   }

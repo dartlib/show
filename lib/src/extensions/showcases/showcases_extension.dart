@@ -29,15 +29,24 @@ class ShowCasesExtension extends Extension {
     if (event is AddShowCasesEvent) {
       _showCases.addAll(event.showCases);
 
-      channel.fire(ShowCasesLoadedState(showCases: _showCases));
+      channel.setState<ShowCasesLoadedState>(
+        ShowCasesLoadedState(showCases: _showCases),
+      );
     } else if (event is LoadShowCasesEvent) {
-      channel.fire(ShowCasesLoadedState(showCases: _showCases));
+      channel.setState<ShowCasesLoadedState>(
+        ShowCasesLoadedState(showCases: _showCases),
+      );
     } else if (event is SelectShowCaseItemEvent) {
       if (_currentShowCaseItem != null) {
         channel.fire(UnloadShowCaseItemEvent(item: _currentShowCaseItem));
       }
       _currentShowCaseItem = event.item;
-      channel.fire(ShowCaseItemLoadedState(item: _currentShowCaseItem));
+
+      channel.setState<ShowCaseItemLoadedState>(
+        ShowCaseItemLoadedState(
+          item: _currentShowCaseItem,
+        ),
+      );
     }
   }
 }

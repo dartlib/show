@@ -28,9 +28,13 @@ class ActionsExtension extends Extension {
     if (event is LogEntryEvent) {
       actions.add(event.entry);
 
-      channel.fire(ActionMessagesState(messages: actions));
+      channel.setState<ActionMessagesState>(
+        ActionMessagesState(messages: actions),
+      );
     } else if (event is LoadActionMessagesEvent) {
-      channel.fire(ActionMessagesState(messages: actions));
+      channel.setState<ActionMessagesState>(
+        ActionMessagesState(messages: actions),
+      );
     }
   }
 }
