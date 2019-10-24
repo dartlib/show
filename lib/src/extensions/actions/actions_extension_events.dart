@@ -1,6 +1,6 @@
 import 'package:show/src/api/event.dart';
 
-import 'log_entry.dart';
+import 'models/log_entry.dart';
 
 abstract class ActionsExtensionEvent extends Event {}
 

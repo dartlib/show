@@ -1,6 +1,7 @@
 import 'package:show/src/api.dart';
 
 import '../actions.dart';
+import 'models/log_entry.dart';
 
 RegExp _exp = RegExp(r'\((.*)\)');
 

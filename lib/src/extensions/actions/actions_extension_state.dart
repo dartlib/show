@@ -1,7 +1,7 @@
 import 'package:meta/meta.dart';
 import 'package:show/src/api/state.dart';
 
-import 'log_entry.dart';
+import 'models/log_entry.dart';
 
 abstract class ActionsExtensionState extends State {}
 

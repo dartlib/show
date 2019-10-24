@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:show/show.dart';
 import 'package:show/src/api/channel_builder.dart';
 
-import 'actions_extension_state.dart';
+import '../actions_extension_state.dart';
 
 class Logger extends StatefulWidget {
   final Channel channel;

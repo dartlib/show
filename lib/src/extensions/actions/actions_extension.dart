@@ -5,7 +5,7 @@ import 'package:show/src/extensions/ui/ui_extension_events.dart';
 
 import '../../api.dart';
 import 'actions_extension_events.dart';
-import 'log_entry.dart';
+import 'models/log_entry.dart';
 import 'panels/actions_panel.dart';
 
 class ActionsExtension extends Extension {

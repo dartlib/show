@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:show/show.dart';
 import 'package:show/src/core/panel.dart';
+import 'package:show/src/extensions/actions/widgets/logger.dart';
 
 class ActionsPanel extends Panel {
   @override
